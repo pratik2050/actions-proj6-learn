@@ -10,9 +10,12 @@ jobs:
       - name: Get code
         uses: actions/checkout@v4
       - name: Load Custom Actions for Cache
+        id: cache-deps
         uses: ./.github/custom/cache-deps
         with:
           caching: 'false'
+      - name: Printing output
+        run: echo "Output from custom action ${{ steps.cache-deps.outputs.used-cache }}"
       - name: Lint code
         run: npm run lint
   test:
